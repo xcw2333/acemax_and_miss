@@ -10,10 +10,6 @@ const routes = [
     path: '/',
     name: 'user_lodin',
     component: user_lodin,
-    beforeEach: (to, form, next) => {
-      console.log(to, form)
-      console.log('进入')
-    }
   },
   {
     path: '/home/:id',
@@ -26,9 +22,8 @@ const router = new VueRouter({
   routes
 })
 
-router.beforeEach((to,from,next)=>{
-  console.log(to,from)
-  next()
-  
-})
+// router.beforeEach((to,from,next)=>{
+//   console.log(to)
+//   next()
+// })
 export default router

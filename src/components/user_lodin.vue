@@ -50,10 +50,10 @@ export default {
     box[0].style.width = document.documentElement.clientWidth + "px";
   },
   created() {
-    if (window.localStorage.name != undefined) {
-      console.log('进入')
+    if (window.localStorage.name != "") {
+      console.log("进入");
       this.$router.push({
-        path:'/home/:id'
+        path: "/home/:id",
       });
     }
   },
@@ -103,8 +103,11 @@ export default {
             { emulateJSON: true }
           )
           .then((data) => {
-            console.log(data);
-            this.$message(data.body);
+            if (data.body.code != "" && data.body.code != undefined) {
+              this.$message(data.body.code);
+            }else{
+              this.$message(data.body)
+            }
           });
       }
     },
