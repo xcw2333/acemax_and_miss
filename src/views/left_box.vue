@@ -14,23 +14,23 @@
         <el-menu-item index="0-1">角色一览</el-menu-item>
       </el-submenu>
       <!-- <el-menu-item v-for="(i,index) in left_name" :key="index" :index='i+1'> <span slot="title" @click="click_tiao(index)">{{i}}</span> </el-menu-item> -->
-      <el-menu-item index="2" @click="zhongji">
+      <el-menu-item index="2" class="type_btn">
         <span slot="title">中级管理</span> </el-menu-item
-      ><el-menu-item index="3">
+      ><el-menu-item index="3" class="type_btn">
         <span slot="title">低级管理</span> </el-menu-item
-      ><el-menu-item index="4">
+      ><el-menu-item index="4" class="type_btn">
         <span slot="title">第五阶管理</span> </el-menu-item
-      ><el-menu-item index="5">
+      ><el-menu-item index="5" class="type_btn">
         <span slot="title">第六阶管理</span> </el-menu-item
-      ><el-menu-item index="6">
+      ><el-menu-item index="6" class="type_btn">
         <span slot="title">第七阶段管理</span> </el-menu-item
-      ><el-menu-item index="7">
+      ><el-menu-item index="7" class="type_btn">
         <span slot="title">第八阶段管理</span> </el-menu-item
-      ><el-menu-item index="8">
+      ><el-menu-item index="8" class="type_btn">
         <span slot="title">第九阶段管理</span> </el-menu-item
-      ><el-menu-item index="9">
+      ><el-menu-item index="9" class="type_btn">
         <span slot="title">第十阶段管理</span> </el-menu-item
-      ><el-menu-item index="10">
+      ><el-menu-item index="10" class="type_btn">
         <span slot="title">日常</span>
       </el-menu-item>
     </el-menu>
@@ -41,14 +41,28 @@
 export default {
   data() {
     return {
-        z_root:false,
-        left_name:['中级管理','低级管理','第五阶段管理','第六阶段管理','第七阶段管理','第八阶段管理','第九阶段管理','第十阶段管理','日常'],
-        types:''
+      z_root: false,
+      left_name: [
+        { names: "中级管理", types: 8 },
+        { names: "低级管理", types: 7 },
+        { names: "第五阶段管理", types: 6 },
+        { names: "第六阶段管理", types: 5 },
+        { names: "第七阶段管理", types: 4 },
+        { names: "第八阶段管理", types: 3 },
+        { names: "第九阶段管理", types: 2 },
+        { names: "第十阶段管理", types: 1 },
+        { names: "日常", types: 0 },
+      ],
+      types: "",
     };
   },
-  created(){
-    if(window.localStorage.name=='总管理'||window.localStorage.type=='10'){
-      this.z_root=true
+  created() {
+    console.log("创建后进入");
+    if (
+      window.localStorage.name == "总管理" ||
+      window.localStorage.type == "10"
+    ) {
+      this.z_root = true;
     }
   },
   methods: {
@@ -58,23 +72,30 @@ export default {
     handleClose(key, keyPath) {
       console.log(key, keyPath);
     },
-    click_tiao(index){
-      console.log(this.left_name[index])
+    click_tiao(index) {
+      console.log(this.left_name[index]);
     },
-
 
     // 十个右边选项栏
 
     // 明天任务在这这里需要把权限列表传到父组件并且在父组件判断当前点击的东西用户有没有权限来查看
 
-    zhongji(){
-        this.types='中级管理'
-        this.$emit('types',this.types)
+    zhongji() {
+      this.types = "中级管理";
+      this.$emit("types", this.types);
+    },
+  },
+  mounted() {
+    // 特殊的事件(上面可以使用v-for来循环没有循环)
+    let type_btn = document.querySelectorAll(".type_btn");
+    for (let i = 0; i < type_btn.length; i++) {
+      type_btn[i].index = i;
+      type_btn[i].addEventListener("click", () => {
+        this.types = this.left_name[type_btn[i].index];
+        this.$emit("types",[this.types,type_btn[i].index]);
+      });
     }
   },
-  mounted(){
-      // 特殊的事件(上面可以使用v-for来循环没有循环)
-  }
 };
 </script>
 

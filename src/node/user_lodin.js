@@ -18,10 +18,12 @@ app.post('/lodins', function (req, res) {
                 if (item.mi == req.body.mi && item.zh == req.body.zh) {
                     res.send({ data: [item], code: '登陆成功' })
                     errs = false
+                    return
                 }
             })
             if (errs) {
                 res.send({code:'登陆失败'})
+                return
             }
         })
     })
@@ -47,7 +49,7 @@ app.post('/zhu', function (req, res) {
             if (zhu_true) {
                 req.body.type = '普通村民'
                 let cons = 'insert into user(mi,zh,type,name) value(?,?,?,?)'
-                conn.query(cons, [req.body.mi, req.body.zh, 1, '普通村民'], function (err, data) {
+                conn.query(cons, [req.body.mi, req.body.zh, 0, '普通村民'], function (err, data) {
                     if (err) {
                         console.log(err)
                     }
