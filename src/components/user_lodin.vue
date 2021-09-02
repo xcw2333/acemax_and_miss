@@ -50,12 +50,11 @@ export default {
     box[0].style.width = document.documentElement.clientWidth + "px";
   },
   created() {
-    if (window.localStorage.name != "") {
-      console.log("进入");
-      this.$router.push({
-        path: "/home/:id",
-      });
-    }
+    // if (window.localStorage.name != ""&&window.localStorage.length!=0){
+    //   this.$router.push({
+    //     path: "/home/:id",
+    //   });
+    // }
   },
   methods: {
     deng() {

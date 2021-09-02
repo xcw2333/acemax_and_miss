@@ -22,10 +22,11 @@ app.post('/lodins', function (req, res) {
                 }
             })
             if (errs) {
-                res.send({code:'登陆失败'})
+                res.send({ code: '登陆失败' })
                 return
             }
         })
+        conn.release()
     })
 })
 
@@ -57,6 +58,7 @@ app.post('/zhu', function (req, res) {
                 })
             }
         })
+        conn.release()
     })
 })
 

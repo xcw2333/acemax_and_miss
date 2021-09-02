@@ -4,8 +4,8 @@
       >Missの后台管理系统<em>当前用户为:{{ type_quan }}</em></span
     >
     <div class="user_right">
+      <!-- 选中active:default-active="activeIndex" -->
       <el-menu
-        :default-active="activeIndex"
         class="el-menu-demo user_zujian"
         mode="horizontal"
         @select="handleSelect"

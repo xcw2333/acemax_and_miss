@@ -11,7 +11,8 @@
     >
       <el-submenu index="0" v-if="z_root">
         <template slot="title">总管理</template>
-        <el-menu-item index="0-1">角色一览</el-menu-item>
+        <el-menu-item index="0-1" class="zong_guan">角色一览</el-menu-item>
+        <el-menu-item index="0-2" class="zong_guan">角色分配</el-menu-item>
       </el-submenu>
       <!-- <el-menu-item v-for="(i,index) in left_name" :key="index" :index='i+1'> <span slot="title" @click="click_tiao(index)">{{i}}</span> </el-menu-item> -->
       <el-menu-item index="2" class="type_btn">
@@ -53,6 +54,7 @@ export default {
         { names: "第十阶段管理", types: 1 },
         { names: "日常", types: 0 },
       ],
+      sume_user:['juser_view','juese_root'],
       types: "",
     };
   },
@@ -84,6 +86,9 @@ export default {
       this.types = "中级管理";
       this.$emit("types", this.types);
     },
+    juese(){
+      this.$emit('types',"总管理");
+    }
   },
   mounted() {
     // 特殊的事件(上面可以使用v-for来循环没有循环)
@@ -95,6 +100,15 @@ export default {
         this.$emit("types",[this.types,type_btn[i].index]);
       });
     }
+
+
+    // 总管理权限部分开始
+    let sum_box=document.querySelectorAll('.zong_guan')
+    sum_box.forEach((item,index)=>{
+      item.onclick=()=>{
+        this.$emit('guan',this.sume_user[index]);
+      }
+    })
   },
 };
 </script>
@@ -140,9 +154,11 @@ img {
 }
 
 .box {
+  overflow: hidden;
   background: #545c64;
-  width: 220px;
-  height: 92vh;
+  width: 23vw;
+  max-width: 220px;
+  height: 91.5vh;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -moz-user-select: none;

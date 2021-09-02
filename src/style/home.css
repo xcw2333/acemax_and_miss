@@ -12,5 +12,6 @@ img{ vertical-align: top; }
 .clearfix:after{ clear: both; }
 
 .contents{
+    width: 100%;
     display: flex;
 }
