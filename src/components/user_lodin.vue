@@ -37,6 +37,8 @@
 
 
 <script>
+import yan from "../javascript/yan";
+import kong from '../javascript/kong_str'
 export default {
   name: "u_lodin",
   data() {
@@ -95,19 +97,28 @@ export default {
       if (this.zh == "" || this.mi == "") {
         this.$message("不可以输入空值");
       } else {
-        this.$http
-          .post(
-            "http://localhost:8000/lodin/zhu",
-            { zh: this.zh, mi: this.mi },
-            { emulateJSON: true }
-          )
-          .then((data) => {
-            if (data.body.code != "" && data.body.code != undefined) {
-              this.$message(data.body.code);
-            }else{
-              this.$message(data.body)
-            }
-          });
+        if (yan(this.zh) && yan(this.mi)) {
+          this.$http
+            .post(
+              "http://localhost:8000/lodin/zhu",
+              { zh: this.zh, mi: this.mi },
+              { emulateJSON: true }
+            )
+            .then((data) => {
+              if (data.body.code != "" && data.body.code != undefined) {
+                this.$message(data.body.code);
+              } else {
+                this.$message(data.body);
+              }
+            });
+        } else {
+          this.$message('不可以输入其他字符或者英文')
+        }
+        // if(kong(this.zh)||kong(this.mi)){
+          
+        // }else{
+        //   this.$message('不可以包含空格')
+        // }
       }
     },
   },

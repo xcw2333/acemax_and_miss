@@ -25,7 +25,9 @@
           v-for="(i, index) in data_view"
           :key="index"
         >
-          {{ i }}
+          <span>id:{{i.id}}</span>
+          <span>当前层级:{{i.name}}</span>
+          <span>层级代号:{{i.type}}</span>
         </div>
       </div>
     </div>
@@ -73,12 +75,6 @@ export default {
     type_page(index) {
       this.type_sum = index;
       this.data_view = [];
-      console.log();
-      // for(let i=0;i<this.big_data.length;i++){
-      //   if(this.big_data[i].name==this.new_datas[index]){
-      //     this.data_view.push(this.big_data[i])
-      //   }
-      // }
       if (this.new_datas[index] == "全部") {
         this.data_view = this.big_data;
       } else {
@@ -106,6 +102,9 @@ export default {
   width: 100vw;
   height: 400px;
   /* background: yellow; */
+}
+.zhu_content_type span{
+  margin-left:20px;
 }
 .tishi_user {
   width: 100%;
